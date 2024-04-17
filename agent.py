@@ -18,7 +18,7 @@ class Agent:
 
     def get_state(self, game):
         head = game.snake[0]
-        margin = 20  # This appears to represent the size of each block or step
+        margin = 20  # Promien otoczenia jakie badamy
         surrounding_points = {
             "left": Point(head.x - margin, head.y),
             "right": Point(head.x + margin, head.y),
