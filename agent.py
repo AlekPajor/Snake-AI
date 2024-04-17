@@ -5,8 +5,7 @@ from snake_game import SnakeGameAI, Direction, Point
 from collections import deque
 
 MAX_MEMORY = 100_000 #maksymalna ilosc elementow
-BATCH_SIZE = 1000
-LR = 0.0001
+ = 1000 #serie
 
 class Agent:
     def __init__(self):
@@ -74,9 +73,9 @@ class Agent:
 
     def train_long_memory(self):
         #jezeli mamy juz 1000 probek
-        if len(self.memory) > BATCH_SIZE:
+        if len(self.memory) > :
             #losowa probka z pamieci o rozmiarze BATCH SIZE
-            sample = random.sample(self.memory, BATCH_SIZE) #lista tupli
+            sample = random.sample(self.memory, ) #lista tupli
         else:
             sample = self.memory
         #rozkladamy tuple
