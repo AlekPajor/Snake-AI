@@ -1,0 +1,11 @@
+deque - kolejka dwustronna
+TRENING:
+    co nam potrzebne:
+        - stan (obecna sytuacja)
+        - obliczenie ruchu na podstawie tego stanu
+        - wykonanie ruchu
+        - obliczenie nowego stanu
+
+epsilon - losowosc
+gamma - discount rate
+memory - deque bierze arguemnt maxlen (jezeli go przekroczymy robi popleft)
