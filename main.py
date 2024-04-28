@@ -1,9 +1,13 @@
 import pygame
 from snake_game import SnakeGame
-from agent import train
+from snake_game_ai import SnakeGameAI
+from agent import Agent
+from training import train
 
 # =============================  AI  =================================
-train()
+game = SnakeGameAI()
+agent = Agent()
+train(agent, game)
 
 # ===========================  PLAYER  ==============================
 # game = SnakeGame()

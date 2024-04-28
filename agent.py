@@ -1,11 +1,9 @@
 import torch
 import random
 import numpy as np
-from snake_game_ai import SnakeGameAI
 from utils import Direction, Point
 from collections import deque
 from model import QNet, QTrainer
-import training_plot
 
 MAX_MEMORY = 100_000  # maksymalna ilosc elementow
 SAMPLE_SIZE = 1000  # ilosc elementow brana do probki
@@ -114,45 +112,3 @@ class Agent:
             # szukamy indeksu najwiekszej wartosci i konwertuejmy na zwykla wartosc
             move[direction] = 1
         return move
-
-
-def train():
-    plot_scores = []
-    plot_mean_scores = []
-    total_score = 0
-    record = 0
-    agent = Agent()
-    game = SnakeGameAI()
-    while True:
-        # stan
-        state_old = agent.get_state(game)
-
-        # pobieramy ruch na podstawie obecnego stanu
-        final_move = agent.get_action(state_old)
-
-        # wykonujemy ruch i pobieramy nowy stan
-        reward, done, score = game.play_step_ai(final_move)
-        state_new = agent.get_state(game)
-
-        # trenujemy pamiec krotka
-        agent.train_short_memory(state_old, final_move, reward, state_new, done)
-
-        # zapamietanie
-        agent.remember(state_old, final_move, reward, state_new, done)
-
-        if done:  # czy game over
-            game.reset()
-            agent.games_number += 1
-            agent.train_long_memory()
-
-            # aktualizacja rekordu
-            if score > record:
-                record = score
-                agent.model.save()
-            print('Game', agent.games_number, 'Score', score, 'Record:', record)
-
-            plot_scores.append(score)
-            total_score += score
-            mean_score = total_score / agent.games_number
-            plot_mean_scores.append(mean_score)
-            training_plot.plot(plot_scores, plot_mean_scores)
