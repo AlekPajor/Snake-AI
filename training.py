@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
 from IPython import display
-from snake_game_ai import SnakeGameAI
-from agent import Agent
 
 plt.ion()
 
@@ -50,15 +48,15 @@ def train(agent, game):
             game.reset()
             agent.games_number += 1
             agent.train_long_memory()
+            agent.model.save()
 
             # aktualizacja rekordu
             if score > record:
                 record = score
-                agent.model.save()
             print('Game', agent.games_number, 'Score', score, 'Record:', record)
 
             plot_scores.append(score)
             total_score += score
             mean_score = total_score / agent.games_number
             plot_mean_scores.append(mean_score)
-            plotTraining(plot_scores, plot_mean_scores)
+            # plotTraining(plot_scores, plot_mean_scores)
